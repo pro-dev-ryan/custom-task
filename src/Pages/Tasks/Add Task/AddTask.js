@@ -1,0 +1,110 @@
+import React, { useReducer } from "react";
+import { getImage } from "../../../Functions/getUrl";
+
+const AddTask = () => {
+  const initialState = {
+    taskName: "",
+    details: "",
+    image: [],
+  };
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "FIELDS":
+        return { ...state, [action.payload.name]: action.payload.value };
+      default:
+        return state;
+
+      case "FILE":
+        return { ...state, [action.payload.name]: action.payload.files };
+    }
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const submit = (e) => {
+    e.preventDefault();
+    const name = state.taskName;
+    const details = state.details;
+    const img = state.image;
+    getImage(img)
+      .then((data) => {
+        if (data.success) {
+          const url = data.data.display_url;
+          const taskData = {
+            name,
+            details,
+            url,
+          };
+          console.log(taskData);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  return (
+    <div>
+      <h4>Add New Task</h4>
+      <div className="p-1 flex justify-center">
+        <form onSubmit={submit} className="flex flex-col gap-2 mb-5 md:w-1/2">
+          <div>
+            <label htmlFor="name">Task Name</label>
+            <div>
+              <input
+                type="text"
+                id="name"
+                name="taskName"
+                onBlur={(e) => {
+                  dispatch({
+                    type: "FIELDS",
+                    payload: { name: e.target.name, value: e.target.value },
+                  });
+                }}
+                className="px-1 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="details">Task Detail</label>
+            <div>
+              <textarea
+                name="details"
+                className="px-1 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
+                id="details"
+                onBlur={(e) => {
+                  dispatch({
+                    type: "FIELDS",
+                    payload: { name: e.target.name, value: e.target.value },
+                  });
+                }}
+                cols="30"
+                rows="8"
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <label htmlFor="">Upload File</label>
+            <div>
+              <input
+                type="file"
+                name="image"
+                onChange={(e) => {
+                  dispatch({
+                    type: "FILE",
+                    payload: { name: e.target.name, files: e.target.files[0] },
+                  });
+                }}
+                className="px-3 py-2 mt-1 w-full md:w-1/2 rounded-md shadow-md border-2 border-gray-500 border-opacity-10 md:shadow-none shadow-gray-300 "
+              />
+            </div>
+          </div>
+          <div className="text-center">
+            <input
+              type="submit"
+              value="Add-Task"
+              className="px-4 py-1 bg-teal-500 text-white my-2 rounded-full w-full md:w-1/3 hover:bg-teal-700 font-medium"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default AddTask;
