@@ -3,9 +3,9 @@ import TaskCard from "../../../Components/TaskCard/TaskCard";
 
 const MyTasks = () => {
   return (
-    <div>
+    <div className="mb-5">
       <h4>My Tasks</h4>
-      <div className="grid grid-cols-1">
+      <div className="grid grid-cols-1 gap-2">
         <TaskCard />
       </div>
     </div>

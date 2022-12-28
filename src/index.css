@@ -18,6 +18,9 @@
   input[type="file"]::file-selector-button {
     @apply bg-teal-500 hover:bg-teal-700 rounded-full px-2 py-1 md:px-4 focus:ring ring-teal-700 border-none outline-none text-white font-medium;
   }
+  h6 {
+    @apply text-lg font-medium;
+  }
   label {
     @apply text-base font-medium;
   }
