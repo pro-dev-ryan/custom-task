@@ -1,0 +1,14 @@
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../Context/FireContext";
+
+const PrivateRoutes = ({ children }) => {
+  const location = useLocation();
+  const { user } = useAuth();
+  if (user && user?.uid) {
+    return children;
+  }
+  return <Navigate to="/login" state={{ from: location }} replace />;
+};
+
+export default PrivateRoutes;

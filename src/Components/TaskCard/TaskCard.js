@@ -6,7 +6,7 @@ const TaskCard = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="p-2 border border-gray-200 border-opacity-30 rounded-md shadow shadow-gray-200">
-      <img src={noImage} className alt="task" />
+      <img src={noImage} alt="task" />
       <div className="mb-2">
         <h6>Task Name</h6>
         <p>Status: pending</p>

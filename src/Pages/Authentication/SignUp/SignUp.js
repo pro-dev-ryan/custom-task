@@ -13,7 +13,7 @@ const SignUp = () => {
     const mail = form.email.value;
     const pass = form.password.value;
     const profPic = form.image.files[0];
-    const pic = getImage(profPic)
+    getImage(profPic)
       .then((data) => {
         if (data.success) {
           const url = data.data.display_url;
@@ -22,9 +22,7 @@ const SignUp = () => {
             .then((data) => {
               console.log(data);
               if (data?.user) {
-                updateInfo(name, url)
-                  .then(() => {})
-                  .then((err) => console.error(err));
+                updateInfo(name, url).then(() => {});
               }
             })
             .catch((err) => console.error(err));

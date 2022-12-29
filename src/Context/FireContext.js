@@ -32,8 +32,7 @@ const FireContext = ({ children }) => {
       });
     };
     return () => unsubscribe();
-  }, []);
-
+  }, [user, auth]);
   const googleSign = () => {
     return signInWithPopup(auth, provider);
   };
@@ -45,17 +44,12 @@ const FireContext = ({ children }) => {
     });
   };
 
-  const test = {
-    text: "this is test",
-  };
-
   const logOut = () => {
     return signOut(auth);
   };
 
   const contents = {
     user,
-    test,
     userSignUp,
     loginUser,
     logOut,

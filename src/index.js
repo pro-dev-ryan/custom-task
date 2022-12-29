@@ -4,12 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import FireContext from "./Context/FireContext";
-
+import { ToastContainer } from "react-toast";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <FireContext>
       <App />
+      <ToastContainer position="top-center" />
     </FireContext>
   </React.StrictMode>
 );

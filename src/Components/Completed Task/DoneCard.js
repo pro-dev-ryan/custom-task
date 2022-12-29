@@ -5,7 +5,7 @@ import noImage from "../../Assets/Misc/No_image_3x4.svg.png";
 const DoneCard = () => {
   return (
     <div className="p-2 border border-gray-200 border-opacity-30 rounded-md shadow shadow-gray-200">
-      <img src={noImage} className alt="task" />
+      <img src={noImage} alt="task" />
       <div className="mb-2">
         <h6>Task Name</h6>
         <p>Status: Completed</p>
