@@ -1,13 +1,41 @@
 import React, { useState } from "react";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../Context/FireContext";
+import { getImage } from "../../../Functions/getUrl";
 const SignUp = () => {
   const [show, setShow] = useState(false);
-  const signup = () => {};
+  const { userSignUp, updateInfo } = useAuth();
+  const signup = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const mail = form.email.value;
+    const pass = form.password.value;
+    const profPic = form.image.files[0];
+    const pic = getImage(profPic)
+      .then((data) => {
+        if (data.success) {
+          const url = data.data.display_url;
+          userSignUp(mail, pass)
+            // .then(res=> res.json())
+            .then((data) => {
+              console.log(data);
+              if (data?.user) {
+                updateInfo(name, url)
+                  .then(() => {})
+                  .then((err) => console.error(err));
+              }
+            })
+            .catch((err) => console.error(err));
+        }
+      })
+      .catch((err) => console.error(err));
+  };
   return (
-    <div>
+    <div className="md:h-[85vh]">
       <h4>Sign-Up</h4>
-      <div>
+      <div className="flex justify-center">
         <form onSubmit={signup} className="flex flex-col gap-2 mb-5 md:w-1/2">
           <div>
             <label htmlFor="name">Full Name</label>
@@ -35,7 +63,7 @@ const SignUp = () => {
             <label htmlFor="pass">Password</label>
             <div className="relative">
               <input
-                name=""
+                name="password"
                 className="px-1 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
                 id="pass"
                 type={`${show ? "password" : "text"}`}

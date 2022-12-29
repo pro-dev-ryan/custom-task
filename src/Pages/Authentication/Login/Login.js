@@ -16,7 +16,7 @@ const Login = () => {
                 type="email"
                 id="email"
                 name="taskName"
-                className="px-6 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
+                className="px-6 md:px-0 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
               />
             </div>
           </div>
@@ -27,7 +27,7 @@ const Login = () => {
                 type={`${show ? "password" : "text"}`}
                 id="pass"
                 name="taskName"
-                className="px-6 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
+                className="px-6 md:px-0  py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
               />
               <Link
                 onClick={() => {

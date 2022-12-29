@@ -17,7 +17,7 @@ const DoneCard = () => {
               Completed
             </div>
           </li>
-          <li className="px-4 py-2 bg-teal-500 rounded-md">
+          <li className="px-4 py-2 bg-teal-500 hover:bg-teal-700 hover:text-white rounded-md">
             <Link className="font-medium text-sm" to="/my-task">
               Not Completed
             </Link>

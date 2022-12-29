@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useAuth } from "../../Context/FireContext";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
+  const { user, logOut } = useAuth();
+  const signOut = () => {
+    logOut().then(() => {});
+  };
   return (
     <div>
       <nav className="flex items-center justify-between mt-2">
@@ -36,6 +41,18 @@ const Navbar = () => {
               Completed Task
             </Link>
           </div>
+          {user?.uid && (
+            <>
+              <div className="focus:bg-teal-500">
+                <Link
+                  onClick={signOut}
+                  className="hover:scale-125 duration-75 "
+                >
+                  Sign Out
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </nav>
     </div>

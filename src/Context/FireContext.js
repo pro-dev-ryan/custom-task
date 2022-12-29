@@ -9,11 +9,12 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-export const ContextAuth = createContext();
+import { app } from "../Firebase/firebase.config";
 
-const FireContext = () => {
+const ContextAuth = createContext();
+const FireContext = ({ children }) => {
   const [user, setUser] = useState({});
-  const auth = getAuth();
+  const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
   const userSignUp = (email, password) => {
@@ -27,9 +28,7 @@ const FireContext = () => {
   useEffect(() => {
     const unsubscribe = () => {
       onAuthStateChanged(auth, (User) => {
-        if (User) {
-          setUser(User);
-        }
+        setUser(User);
       });
     };
     return () => unsubscribe();
@@ -39,11 +38,15 @@ const FireContext = () => {
     return signInWithPopup(auth, provider);
   };
 
-  const updateInfo = (Name, url) => {
+  const updateInfo = (name, url) => {
     return updateProfile(auth.currentUser, {
-      displayName: Name,
+      displayName: name,
       photoURL: url,
     });
+  };
+
+  const test = {
+    text: "this is test",
   };
 
   const logOut = () => {
@@ -52,16 +55,19 @@ const FireContext = () => {
 
   const contents = {
     user,
+    test,
     userSignUp,
     loginUser,
     logOut,
     updateInfo,
     googleSign,
   };
-  return <ContextAuth.Provider value={contents} />;
+  return (
+    <ContextAuth.Provider value={contents}> {children} </ContextAuth.Provider>
+  );
 };
 export const useAuth = () => {
-  const { context } = useContext(ContextAuth);
+  const context = useContext(ContextAuth);
   return context;
 };
 
