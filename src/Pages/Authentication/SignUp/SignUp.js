@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../Context/FireContext";
+import { toast } from "react-toast";
 import { getImage } from "../../../Functions/getUrl";
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -20,12 +21,22 @@ const SignUp = () => {
           userSignUp(mail, pass)
             // .then(res=> res.json())
             .then((data) => {
-              console.log(data);
               if (data?.user) {
-                updateInfo(name, url).then(() => {});
+                updateInfo(name, url).then(() => {
+                  toast.success("Successfully logged in", {
+                    backgroundColor: "teal",
+                    color: "white",
+                  });
+                });
               }
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+              console.error(err);
+              toast.error("Something went wrong", {
+                backgroundColor: "red",
+                color: "White",
+              });
+            });
         }
       })
       .catch((err) => console.error(err));

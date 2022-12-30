@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { useAuth } from "../../../Context/FireContext";
 import { getImage } from "../../../Functions/getUrl";
 
 const AddTask = () => {
@@ -19,6 +20,7 @@ const AddTask = () => {
     }
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { user } = useAuth();
   const submit = (e) => {
     e.preventDefault();
     const name = state.taskName;
@@ -41,6 +43,11 @@ const AddTask = () => {
   return (
     <div>
       <h4>Add New Task</h4>
+      {user || (
+        <p className="text-rose-400 text-sm md:text-base lg:text-lg  text-center">
+          Login to add task
+        </p>
+      )}
       <div className="p-1 flex justify-center">
         <form onSubmit={submit} className="flex flex-col gap-2 mb-5 md:w-1/2">
           <div>
@@ -95,11 +102,13 @@ const AddTask = () => {
             </div>
           </div>
           <div className="text-center">
-            <input
-              type="submit"
-              value="Add-Task"
-              className="px-4 py-1 bg-teal-500 text-white my-2 rounded-full w-full md:w-1/3 hover:bg-teal-700 font-medium"
-            />
+            {user && (
+              <input
+                type="submit"
+                value="Add-Task"
+                className="px-4 py-1 bg-teal-500 text-white my-2 rounded-full w-full md:w-1/3 hover:bg-teal-700 font-medium"
+              />
+            )}
           </div>
         </form>
       </div>

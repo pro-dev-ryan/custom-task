@@ -14,14 +14,17 @@ import { app } from "../Firebase/firebase.config";
 const ContextAuth = createContext();
 const FireContext = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loader, setLoader] = useState(true);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
   const userSignUp = (email, password) => {
+    setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const loginUser = (email, password) => {
+    setLoader(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -29,6 +32,7 @@ const FireContext = ({ children }) => {
     const unsubscribe = () => {
       onAuthStateChanged(auth, (User) => {
         setUser(User);
+        setLoader(false);
       });
     };
     return () => unsubscribe();
@@ -45,10 +49,12 @@ const FireContext = ({ children }) => {
   };
 
   const logOut = () => {
+    setLoader(true);
     return signOut(auth);
   };
 
   const contents = {
+    loader,
     user,
     userSignUp,
     loginUser,
