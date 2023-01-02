@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Context/FireContext";
 import { toast } from "react-toast";
 import { getImage } from "../../../Functions/getUrl";
 const SignUp = () => {
   const [show, setShow] = useState(false);
   const { userSignUp, updateInfo } = useAuth();
+  const navigate = useNavigate();
   const signup = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,7 +20,6 @@ const SignUp = () => {
         if (data.success) {
           const url = data.data.display_url;
           userSignUp(mail, pass)
-            // .then(res=> res.json())
             .then((data) => {
               if (data?.user) {
                 updateInfo(name, url).then(() => {
@@ -28,6 +28,7 @@ const SignUp = () => {
                     color: "white",
                   });
                 });
+                navigate("/");
               }
             })
             .catch((err) => {
@@ -75,7 +76,7 @@ const SignUp = () => {
                 name="password"
                 className="px-1 py-1.5 mt-1 w-full rounded-md shadow-md border border-gray-500 border-opacity-10 shadow-gray-300"
                 id="pass"
-                type={`${show ? "password" : "text"}`}
+                type={`${!show ? "password" : "text"}`}
               ></input>
               <Link
                 onClick={() => {

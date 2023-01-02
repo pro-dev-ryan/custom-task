@@ -1,6 +1,8 @@
 import React, { useReducer } from "react";
 import { useAuth } from "../../../Context/FireContext";
+import { addPost } from "../../../Functions/addPost";
 import { getImage } from "../../../Functions/getUrl";
+import { toast } from "react-toast";
 
 const AddTask = () => {
   const initialState = {
@@ -17,14 +19,21 @@ const AddTask = () => {
 
       case "FILE":
         return { ...state, [action.payload.name]: action.payload.files };
+
+      case "CLEAR-ALL":
+        return { initialState };
     }
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const { user } = useAuth();
   const submit = (e) => {
     e.preventDefault();
     const name = state.taskName;
     const details = state.details;
+    const userName = user.displayName;
+    const email = user?.email;
+    const status = false;
     const img = state.image;
     getImage(img)
       .then((data) => {
@@ -34,8 +43,24 @@ const AddTask = () => {
             name,
             details,
             url,
+            status,
+            userName,
+            email,
           };
-          console.log(taskData);
+          addPost(taskData)
+            .then((data) => {
+              if (data.status) {
+                toast.success(`${data.message}`);
+                dispatch({
+                  type: "CLEAR-ALL",
+                  payload: { name: e.target, value: e.target.value },
+                });
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+              toast.error(err.message);
+            });
         }
       })
       .catch((err) => console.log(err));
@@ -43,7 +68,7 @@ const AddTask = () => {
   return (
     <div>
       <h4>Add New Task</h4>
-      {user || (
+      {!user?.uid && (
         <p className="text-rose-400 text-sm md:text-base lg:text-lg  text-center">
           Login to add task
         </p>
@@ -102,7 +127,7 @@ const AddTask = () => {
             </div>
           </div>
           <div className="text-center">
-            {user && (
+            {user?.uid && (
               <input
                 type="submit"
                 value="Add-Task"

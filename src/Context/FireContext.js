@@ -55,6 +55,7 @@ const FireContext = ({ children }) => {
 
   const contents = {
     loader,
+    setLoader,
     user,
     userSignUp,
     loginUser,

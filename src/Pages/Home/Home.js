@@ -38,11 +38,11 @@ const Home = () => {
               <span className="font-medium md:text-base lg:text-lg">
                 Task:
               </span>{" "}
-              Office Meeting with Jane Doe
+              Going to shopping mall for next fashion show
             </p>
             <p className="text-sm md:text-base lg:text-lg">
               {" "}
-              <span className="font-medium">Time:</span> 5.05 PM
+              <span className="font-medium">Time:</span> 12.50 PM
             </p>
           </div>
         </div>
@@ -55,12 +55,12 @@ const Home = () => {
           <div>
             <p className="text-sm md:text-base lg:text-lg">
               {" "}
-              <span className="font-medium">Task:</span> Office Meeting with
-              Jane Doe
+              <span className="font-medium">Task:</span> Submit physics theory
+              of ignition and friction
             </p>
             <p className="text-sm md:text-base lg:text-lg">
               {" "}
-              <span className="font-medium">Time:</span> 5.05 PM
+              <span className="font-medium">Time:</span> 9.00 AM
             </p>
           </div>
         </div>

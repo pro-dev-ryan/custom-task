@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         element: <AddTask />,
       },
       {
-        path: "/my-task",
+        path: "/my-task/:email",
         element: (
           <PrivateRoutes>
             <MyTasks />
