@@ -1,5 +1,5 @@
 export const addPost = async (body) => {
-  const res = await fetch("http://localhost:5000/addtask", {
+  const res = await fetch("https://task-app-server-lyart.vercel.app/addtask", {
     method: "POST",
     headers: {
       "content-type": "application/json",

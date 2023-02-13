@@ -5,11 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import FireContext from "./Context/FireContext";
 import { ToastContainer } from "react-toast";
+import ContextTasks from "./Context/ContextTasks";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <FireContext>
-      <App />
+      <ContextTasks>
+        <App />
+      </ContextTasks>
       <ToastContainer position="top-center" />
     </FireContext>
   </React.StrictMode>

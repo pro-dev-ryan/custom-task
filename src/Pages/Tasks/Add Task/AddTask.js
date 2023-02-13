@@ -3,8 +3,10 @@ import { useAuth } from "../../../Context/FireContext";
 import { addPost } from "../../../Functions/addPost";
 import { getImage } from "../../../Functions/getUrl";
 import { toast } from "react-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
+  const navigate = useNavigate();
   const initialState = {
     taskName: "",
     details: "",
@@ -55,6 +57,7 @@ const AddTask = () => {
                   type: "CLEAR-ALL",
                   payload: { name: e.target, value: e.target.value },
                 });
+                navigate(`/my-task/${user?.email}`);
               }
             })
             .catch((err) => {

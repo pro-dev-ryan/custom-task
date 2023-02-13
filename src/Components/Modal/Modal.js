@@ -1,26 +1,6 @@
 import React from "react";
-import { toast } from "react-toast";
-import { getUpdate } from "../../Functions/getUpdates";
 
-const Modal = ({ modalData, setModal }) => {
-  const submit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const details = form.details.value;
-    const updateData = {
-      name,
-      details,
-    };
-    getUpdate(modalData?._id, updateData).then((data) => {
-      if (data?.status) {
-        toast.success(data?.message);
-        setModal(false);
-      } else {
-        toast.error(data?.message);
-      }
-    });
-  };
+const Modal = ({ modalData, submit }) => {
   return (
     <div>
       <h4>Update Task</h4>

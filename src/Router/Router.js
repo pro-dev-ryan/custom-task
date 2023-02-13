@@ -23,6 +23,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/my-task/:email",
+        loader: ({ params }) => {
+          return fetch(
+            `https://task-app-server-lyart.vercel.app/getpost/${params.email}`
+          );
+        },
         element: (
           <PrivateRoutes>
             <MyTasks />
@@ -31,6 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/done-task",
+        loader: () => fetch("https://task-app-server-lyart.vercel.app/getdone"),
         element: <CompletedTask />,
       },
       {

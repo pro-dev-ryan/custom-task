@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toast";
 export const usePost = (mail) => {
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/getpost/${mail}`)
+    fetch(`https://task-app-server-lyart.vercel.app/getpost/${mail}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.status) {

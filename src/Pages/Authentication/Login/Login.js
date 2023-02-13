@@ -15,7 +15,6 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const pass = form.pass.value;
-    console.log(email, pass);
     loginUser(email, pass)
       .then((res) => {
         if (res?.user) {
@@ -53,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-[80vh]">
+    <div className="min-h-screen">
       <h4>Login</h4>
       <div className="p-1 flex justify-center">
         <form
@@ -101,7 +100,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-      <div>
+      <div className="text-center">
         <p className="text-sm">
           Not an user?{" "}
           <Link to="/signup" className="text-teal-500 font-medium">

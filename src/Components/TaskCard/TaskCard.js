@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import noImage from "../../Assets/Misc/No_image_3x4.svg.png";
 import { SlOptionsVertical } from "react-icons/sl";
-const TaskCard = ({ task, updatePost, deletePost }) => {
+const TaskCard = ({ task, updatePost, deletePost, handleComplete }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -14,7 +14,13 @@ const TaskCard = ({ task, updatePost, deletePost }) => {
       />
       <div className="mb-2">
         <h6>Task Name: {task.name} </h6>
-        <p>Status: {task?.status ? "Completed" : "Pending"}</p>
+        <p
+          className={`${
+            task?.status ? "text-teal-500" : "text-neutral-500"
+          } font-medium`}
+        >
+          Status: {task?.status ? "Completed" : "Pending"}
+        </p>
         <p>Details: {task?.details}</p>
       </div>
       <div className="flex justify-between mt-2">
@@ -50,8 +56,20 @@ const TaskCard = ({ task, updatePost, deletePost }) => {
           </ul>
         </div>
         <div>
-          <input type="checkbox" name="" className="mr-2" id="done" />
-          <label htmlFor="done">Completed</label>
+          {!task?.status ? (
+            <button
+              onClick={() => handleComplete(task?._id)}
+              className="px-3 py-1 bg-teal-500 rounded-lg font-medium text-white"
+            >
+              Mark as Complete
+            </button>
+          ) : (
+            <>
+              <div className="px-2 py-1 ring-teal-500 ring font-medium">
+                <p>Completed</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
