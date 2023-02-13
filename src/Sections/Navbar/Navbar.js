@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useAuth } from "../../Context/FireContext";
@@ -28,18 +28,13 @@ const Navbar = () => {
           }  absolute flex bg-white p-3 right-0 top-6 md:static gap-5 mr-2 text-sm md:text-base  font-medium`}
         >
           <div className="focus:bg-teal-500">
-            <Link
-              onClick={() => setShow(!show)}
-              to="/add-task"
-              className="hover:scale-125 duration-75 "
-            >
+            <Link to="/add-task" className="hover:scale-125 duration-75 ">
               Add Task
             </Link>
           </div>
 
           <div className="focus:bg-teal-500">
             <Link
-              onClick={() => setShow(!show)}
               to={`/my-task/${user?.email}`}
               className="hover:scale-125 duration-75 "
             >
@@ -47,11 +42,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="focus:bg-teal-500">
-            <Link
-              onClick={() => setShow(!show)}
-              to="/done-task"
-              className="hover:scale-125 duration-75 "
-            >
+            <Link to="/done-task" className="hover:scale-125 duration-75 ">
               Completed Task
             </Link>
           </div>

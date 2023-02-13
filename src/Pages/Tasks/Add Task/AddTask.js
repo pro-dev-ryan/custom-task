@@ -69,7 +69,7 @@ const AddTask = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div>
+    <div className="md:min-h-screen">
       <h4>Add New Task</h4>
       {!user?.uid && (
         <p className="text-rose-400 text-sm md:text-base lg:text-lg  text-center">

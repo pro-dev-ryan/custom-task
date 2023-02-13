@@ -31,7 +31,7 @@ const CompletedTask = () => {
     <div
       className={`${
         comps?.result?.length <= 2 ? "h-[90vh]" : "h-auto"
-      } mb-5 md:h-full`}
+      } mb-5 md:min-h-screen`}
     >
       <h4>Completed Task</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:mt-10">

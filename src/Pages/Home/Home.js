@@ -5,7 +5,7 @@ import img3 from "../../Assets/Box-icons/256x256.png";
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-2 md:gap-3 my-2  lg:gap-5">
+    <div className="flex flex-col gap-2 md:gap-3 my-2 lg:gap-5">
       <h4>Recently Added Tasks </h4>
       <div className="flex flex-col items-center gap-3 md:gap-5 lg:gap-10">
         <div className="flex border p-2 md:p-3 gap-2 md:w-1/2  lg:p-5 border-gray-100 shadow-md shadow-gray-200 rounded-md">
